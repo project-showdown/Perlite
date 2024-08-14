@@ -36,7 +36,7 @@ jobs:
         with:
           # list of Docker images to use as base name for tags
           images: |
-            sec77/perlite
+            sohal03/capstone:dev1
           # Docker tags based on the following events/attributes
           tags: |
             type=ref,event=branch
