@@ -27,27 +27,14 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-      - name: Docker meta
-        id: meta # you'll use this in the next step
-        uses: docker/metadata-action@v4
-        with:
-          # list of Docker images to use as base name for tags
-          images: |
-            sohal03/capstone:main1
-          # Docker tags based on the following events/attributes
-          tags: |
-            type=pep440,pattern={{version}}
-          # type=ref,event=branch
-          # type=ref,event=pr
-          # type=semver,pattern={{major}}.{{minor}}
-          # type=semver,pattern={{major}}
-          # type=sha
-          # type=schedule
       - name: Build and push
         uses: docker/build-push-action@v4
         with:
           context: ./perlite
           platforms: linux/amd64,linux/arm/v7
-          push: ${{ github.event_name != 'pull_request' }}
-          tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels }}
+          push: true
+          tags: 
+      - name: Build container image
+        run: docker build -t sohal03/capstone:main1 perlite  # Replace placeholders with your details
+      - name: Push container image to Docker Hub
+        run: docker push sohal03/capstone:main1  # Replace placeholders with your details
