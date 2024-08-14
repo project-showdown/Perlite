@@ -33,6 +33,7 @@ jobs:
           context: ./perlite
           platforms: linux/amd64,linux/arm/v7
           push: true
+          tags: sohal03/capstone:main1
       - name: Build container image
         run: docker build -t sohal03/capstone:main1 perlite  # Replace placeholders with your details
       - name: Push container image to Docker Hub
